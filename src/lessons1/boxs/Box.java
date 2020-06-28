@@ -1,22 +1,14 @@
 package lessons1.boxs;
 
-import lessons1.Suitabilitys.Suitability;
 import lessons1.fruits.Fruit;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Box<T extends Fruit> {
 
     private ArrayList<T> fruits = new ArrayList<>();
-    private Suitability suitability;
-
-    public Box(Suitability suitability) {
-        this.suitability = suitability;
-    }
-
-    private String getSuitabilityString() {
-        return this.suitability.getString();
-    }
+    private int weight = 0;
 
     public Integer getWeight() {
         int weight = 0;
@@ -28,27 +20,24 @@ public class Box<T extends Fruit> {
     }
 
     public void addFruit(T fruit) {
+
         this.fruits.add(fruit);
+        this.weight += fruit.getWeight();
     }
 
     public boolean compare(Box box) {
-        return this.getWeight().equals(box.getWeight());
+        return this.weight == box.weight;
     }
 
-    public void spread(Box box) {
-        if (this.isSuitableBox(box)) {
+    public void spread(Box<T> box) {
 
-            for (T t : this.fruits) {
-                box.addFruit(t);
-            }
+        Iterator<T> iterator = this.fruits.iterator();
 
-            this.fruits.clear();
-        } else {
-            System.out.println("В коробке другие фрукты!");
+        while (iterator.hasNext()) {
+            T fruit = iterator.next();
+            box.addFruit(fruit);
+            iterator.remove();
         }
-    }
 
-    private boolean isSuitableBox(Box box) {
-        return this.getSuitabilityString().equals(box.getSuitabilityString());
     }
 }

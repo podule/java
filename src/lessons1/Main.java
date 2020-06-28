@@ -1,7 +1,5 @@
 package lessons1;
 
-import lessons1.Suitabilitys.SuitabilityForApples;
-import lessons1.Suitabilitys.SuitabilityForOranges;
 import lessons1.boxs.Box;
 import lessons1.fruits.Apple;
 import lessons1.fruits.Orange;
@@ -33,7 +31,7 @@ public class Main {
         Apple apple2 = new Apple();
         Apple apple3 = new Apple();
 
-        Box<Apple> appleBox = new Box<>(new SuitabilityForApples());
+        Box<Apple> appleBox = new Box<>();
         appleBox.addFruit(apple1);
         appleBox.addFruit(apple2);
         appleBox.addFruit(apple3);
@@ -44,7 +42,7 @@ public class Main {
         Orange orange2 = new Orange();
         Orange orange3 = new Orange();
 
-        Box<Orange> orangeBox = new Box<>(new SuitabilityForOranges());
+        Box<Orange> orangeBox = new Box<>();
         orangeBox.addFruit(orange1);
         orangeBox.addFruit(orange2);
         orangeBox.addFruit(orange3);
@@ -53,11 +51,9 @@ public class Main {
 
         System.out.println("Размер ящиков одинаков? " + appleBox.compare(orangeBox));
 
-        appleBox.spread(orangeBox);
-
         Apple apple4 = new Apple();
 
-        Box<Apple> appleBox2 = new Box<>(new SuitabilityForApples());
+        Box<Apple> appleBox2 = new Box<>();
         appleBox2.addFruit(apple4);
 
         appleBox.spread(appleBox2);
