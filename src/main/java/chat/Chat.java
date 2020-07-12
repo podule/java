@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 public class Chat extends JFrame implements Thread.UncaughtExceptionHandler, ActionListener {
 
@@ -16,6 +17,8 @@ public class Chat extends JFrame implements Thread.UncaughtExceptionHandler, Act
     private final JButton btnSend = new JButton("Send");
     private final JPanel panelBottom = new JPanel(new BorderLayout());
     private static MessagesHistory messagesHistory;
+
+    private static Logger logger = Logger.getLogger(Chat.class.getName());
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -66,6 +69,7 @@ public class Chat extends JFrame implements Thread.UncaughtExceptionHandler, Act
         if(src == btnSend || src == tfMessage){
             sendMessage();
         } else {
+            logger.info("Unknown sourse");
             throw new RuntimeException("Unknown sourse");
         }
     }

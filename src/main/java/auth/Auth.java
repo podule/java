@@ -8,12 +8,15 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 public class Auth extends JFrame {
 
     private Socket socket;
     private DataInputStream in;
     private DataOutputStream out;
+
+    private static Logger logger = Logger.getLogger(Chat.class.getName());
 
     public Auth() throws HeadlessException, IOException {
         socket = new Socket("localhost", 8189);
@@ -39,6 +42,8 @@ public class Auth extends JFrame {
                 if (response.equals("OK")) {
                     new Chat();
                     dispose();
+                } else {
+                    logger.info("Ошибка аутентификации " + response);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

@@ -7,11 +7,13 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 public class Server {
 
     private ServerSocket srv;
     private DBHelper helper;
+    private static Logger logger = Logger.getLogger(Server.class.getName());
 
     public DBHelper getHelper() {
         return helper;
@@ -20,7 +22,7 @@ public class Server {
 
     public Server() throws IOException, SQLException {
         srv = new ServerSocket(8189);
-        System.out.println("server started!");
+        logger.info("server started!");
         helper = new DBHelper();
         helper.connect();
         helper.init();
@@ -28,7 +30,7 @@ public class Server {
         while (true) {
             try {
                 socket = srv.accept();
-                System.out.println("Client accepted!");
+                logger.info("Client accepted!");
                 AuthHandler handler = new AuthHandler(this, socket);
                 new Thread(handler).start();
             } catch (Exception e) {
